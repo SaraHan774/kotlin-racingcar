@@ -1,46 +1,34 @@
 package week1
 
-import java.util.Stack
+import java.util.LinkedList
 
-
-fun main() {
-    // get input from console
-    val input = readln()
-    Calculator().calculate(input)
-}
-
-// TODO -  테스트 코드 작성하기
 class Calculator {
 
-    fun calculate(input: String?) {
-        require(input.isNullOrEmpty().not()) {
+    fun calculate(input: String?): String {
+        require(input.isNullOrBlank().not()) {
             "Illegal argument $input. Input cannot be null or empty!"
         }
 
-        val stack = Stack<String>()
-        input!!.split(" ", "\t", "\\s")
+        val queue = input!!.split(" ")
             .takeIf { it.size >= 3 }
-            ?.reversed()
-            ?.forEach { stack.push(it) }
+            ?.toCollection(LinkedList())
             ?: throw IllegalStateException("At least 2 operands and 1 operator is required.")
 
-        while (stack.size > 1) {
-            val x = stack.pop()
-            val operator = Operator.fromInput(stack.pop())
-            val y = stack.pop()
-
-            val operands = Operands(x, y)
-            val result = operands.applyOperator(operator).toString()
-            stack.push(result)
+        while (queue.size > 1) {
+            val x = queue.poll()
+            val op = queue.poll()
+            val y = queue.poll()
+            val result = Operands(x, y).applyOperator(Operator.from(op)).toString()
+            queue.addFirst(result)
         }
-        println(stack.pop())
+        return queue.poll()
     }
 
     enum class Operator(private val symbol: String) {
         Plus("+"), Minus("-"), Divide("/"), Multiply("*");
 
         companion object {
-            fun fromInput(input: String): Operator {
+            fun from(input: String): Operator {
                 return entries.find { it.symbol == input } ?: throw IllegalArgumentException("Invalid Operator $input")
             }
         }
@@ -50,11 +38,11 @@ class Calculator {
         private val _x: String,
         private val _y: String
     ) {
-        val x: Int = getOperandOrThrow(_x)
-        val y: Int = getOperandOrThrow(_y)
+        val x: Int = getIntOrThrow(_x)
+        val y: Int = getIntOrThrow(_y)
 
-        private fun getOperandOrThrow(n: String): Int {
-            require(n.isNotEmpty() && n.matches(Regex("^\\d+\$"))) {
+        private fun getIntOrThrow(n: String): Int {
+            require(n.isNotEmpty() || n.isNotBlank()) {
                 "Invalid operand format $n"
             }
             return n.toInt()
