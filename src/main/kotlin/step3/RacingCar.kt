@@ -7,8 +7,11 @@ fun main() {
     val numCars = inputView.readNumCars()
     val numTries = inputView.readNumTries()
 
+    val racingGame = RacingGame(numCars, numTries)
+    racingGame.start()
+
     val resultView = ResultView()
-    resultView.printResult(numCars, numTries)
+    resultView.printResult(racingGame.getResult())
 }
 
 class InputView {
@@ -26,14 +29,39 @@ class InputView {
 }
 
 class ResultView {
-    fun printResult(numCars: Int, numTries: Int) {
-        val cars = List(numCars) { RacingCar() }
-        for (i in 0 until numTries) {
+    fun printResult(result: List<String>) {
+        result.forEach {
             println()
-            cars.forEach {
-                it.moveForward()
-                println(it.path)
+            println(it)
+        }
+    }
+}
+
+class RacingGame(
+    numCars: Int,
+    private val numTries: Int,
+) {
+    private val cars = List(numCars) { RacingCar() }
+    private val roundToPath = sortedMapOf(0 to "")
+
+    fun start() {
+        for (round in 0 until numTries) {
+            cars.forEach { car ->
+                car.moveForward()
+                recordPath(round, car.path)
             }
+        }
+    }
+
+    fun getResult(): List<String> {
+        return roundToPath.map { it.value }
+    }
+
+    private fun recordPath(round: Int, path: String) {
+        if (roundToPath[round] != null) {
+            roundToPath[round] = roundToPath[round] + "\n" + path
+        } else {
+            roundToPath[round] = path
         }
     }
 }
@@ -45,12 +73,12 @@ class RacingCar {
         private set
 
     fun moveForward() {
-        if (getShouldMoveFromRandom()) {
+        if (shouldMove()) {
             pathDash.repeat(++currentPosition).also { path = it }
         }
     }
 
-    private fun getShouldMoveFromRandom(): Boolean {
+    private fun shouldMove(): Boolean {
         val randomUntil = 9
         val minForwardThreshold = 4
         return Random.nextInt(until = randomUntil) >= minForwardThreshold
