@@ -57,7 +57,10 @@ class RacingGame(
         return roundToPath.map { it.value }
     }
 
-    private fun recordPath(round: Int, path: String) {
+    private fun recordPath(
+        round: Int,
+        path: String,
+    ) {
         if (roundToPath[round] != null) {
             roundToPath[round] = roundToPath[round] + "\n" + path
         } else {
