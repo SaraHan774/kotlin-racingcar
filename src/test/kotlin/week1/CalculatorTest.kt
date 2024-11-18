@@ -2,6 +2,7 @@ package week1
 
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -35,10 +36,15 @@ class CalculatorTest {
     @ParameterizedTest
     @CsvSource(value = [
         "1 / 1=1",
-        "8 / 4 / 2=1"
+        "8 / 4 / 2=1",
     ], delimiter='=')
     fun `나눗셈`(input: String, expected: String) {
         assertEquals(input, expected)
+    }
+
+    @Test
+    fun `나눗셈 by Zero`() {
+        assertThrows(ArithmeticException::class.java) { calculator.calculate("8 / 0") }
     }
 
     @ParameterizedTest
