@@ -1,4 +1,4 @@
-package step3
+package week1.step3
 
 import kotlin.random.Random
 
