@@ -6,8 +6,8 @@ class RacingCar {
     var currentPosition = 1
         private set
 
-    fun moveForward() {
-        if (shouldMove()) {
+    fun moveForward(shouldMove: Boolean = shouldMove()) {
+        if (shouldMove) {
             ++currentPosition
         }
     }
