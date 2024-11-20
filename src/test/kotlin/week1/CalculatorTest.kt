@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class CalculatorTest {
-
     private val calculator = Calculator()
 
     @ParameterizedTest
@@ -18,26 +17,30 @@ class CalculatorTest {
             "1 + 1=2",
             "2 + 2 + 2=6",
         ],
-        delimiter='='
+        delimiter = '='
     )
     fun `덧셈`(input: String, expected: String) {
         assertEquals(input, expected)
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "1 - 1=0",
-        "1 - 1 - 1=-1"
-    ], delimiter='=')
+    @CsvSource(
+        value = [
+            "1 - 1=0",
+            "1 - 1 - 1=-1"
+        ], delimiter = '='
+    )
     fun `뺄셈`(input: String, expected: String) {
         assertEquals(input, expected)
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "1 / 1=1",
-        "8 / 4 / 2=1",
-    ], delimiter='=')
+    @CsvSource(
+        value = [
+            "1 / 1=1",
+            "8 / 4 / 2=1",
+        ], delimiter = '='
+    )
     fun `나눗셈`(input: String, expected: String) {
         assertEquals(input, expected)
     }
@@ -48,10 +51,12 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "9 * 9=81",
-        "2 * 2 * 2=8",
-    ], delimiter='=')
+    @CsvSource(
+        value = [
+            "9 * 9=81",
+            "2 * 2 * 2=8",
+        ], delimiter = '='
+    )
     fun `곱셈`(input: String, expected: String) {
         assertEquals(input, expected)
     }
@@ -70,19 +75,23 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = [
-        "1 & 3",
-        "1 % 3"
-    ])
+    @ValueSource(
+        strings = [
+            "1 & 3",
+            "1 % 3"
+        ]
+    )
     fun `{given} 사칙연산 기호 포함되지 않은 문자열 {when} calculate() {then} IllegalArgumentException 던짐`(input: String) {
         assertThatIllegalArgumentException()
             .isThrownBy { calculator.calculate(input) }
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "1 + 2 / 2 * 3 / 3=1"
-    ], delimiter = '=')
+    @CsvSource(
+        value = [
+            "1 + 2 / 2 * 3 / 3=1"
+        ], delimiter = '='
+    )
     fun `{given} 사칙연산 모두 포함된 문자열 {when} calculate() {then} 연산자 등장 순서대로 계산함`(
         input: String, expected: String,
     ) {

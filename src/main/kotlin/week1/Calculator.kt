@@ -3,7 +3,6 @@ package week1
 import java.util.LinkedList
 
 class Calculator {
-
     private val minInputTokens = 3
 
     fun calculate(input: String?): String {
@@ -33,7 +32,7 @@ class Calculator {
         Plus("+", { it.x + it.y }),
         Minus("-", { it.x - it.y }),
         Divide("/", { it.x / it.y }),
-        Multiply("*", { it.x * it.y });
+        Multiply("*", { it.x * it.y }),;
 
         companion object {
             fun from(input: String): Operator {
@@ -44,7 +43,7 @@ class Calculator {
 
     data class Operands(
         private val _x: String,
-        private val _y: String
+        private val _y: String,
     ) {
         val x: Int = getIntOrThrow(_x)
         val y: Int = getIntOrThrow(_y)
