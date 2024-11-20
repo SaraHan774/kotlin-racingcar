@@ -5,10 +5,11 @@ import week1.step3.GameRound
 class ResultView {
 
     fun printResult(rounds: List<GameRound>) {
+        println("실행 결과")
         rounds.forEach { round ->
             round.records.forEach { positionCount ->
-                repeat(positionCount) { print(PATH_DASH) }
-                println()
+                val path = PATH_DASH.repeat(positionCount)
+                println(path)
             }
             println()
         }
