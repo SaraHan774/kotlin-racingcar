@@ -1,6 +1,6 @@
 package week1.step3.view
 
-import week1.step3.domain.GameRound
+import week1.step3.racing.GameRound
 
 class ResultView {
     private val pathDash = "-"

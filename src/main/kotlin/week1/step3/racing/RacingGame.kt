@@ -1,4 +1,4 @@
-package week1.step3.domain
+package week1.step3.racing
 
 class RacingGame(
     numCars: Int,
