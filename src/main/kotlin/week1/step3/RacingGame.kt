@@ -1,4 +1,4 @@
-package week1.step3.racing
+package week1.step3
 
 class RacingGame(
     numCars: Int,

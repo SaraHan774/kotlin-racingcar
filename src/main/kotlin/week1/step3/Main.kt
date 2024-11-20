@@ -1,6 +1,6 @@
 package week1.step3
 
-import week1.step3.racing.RacingGame
+import week1.step3.RacingGame
 import week1.step3.view.InputView
 import week1.step3.view.InputView.Companion.HOW_MANY_CARS_MESSAGE
 import week1.step3.view.InputView.Companion.HOW_MANY_TRIES_MESSAGE
