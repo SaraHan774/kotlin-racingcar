@@ -22,5 +22,5 @@ class RacingGame(
 
 data class GameRound(
     val id: Int,
-    val records: List<Int>
+    val records: List<Int>,
 )
