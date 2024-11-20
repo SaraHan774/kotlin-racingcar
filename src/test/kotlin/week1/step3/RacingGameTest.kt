@@ -6,7 +6,6 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 class RacingGameTest {
-
     @Test
     fun `{given} 자동차 대수 0대 시도 횟수 0번 {when} start() {then} gameRounds 는 Empty 상태`() {
         val game = RacingGame(0, 0)
