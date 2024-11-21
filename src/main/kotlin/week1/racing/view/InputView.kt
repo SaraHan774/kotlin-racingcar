@@ -1,4 +1,4 @@
-package week1.step3.view
+package week1.racing.view
 
 class InputView {
     fun readIntSafelyOrZero(promptMessage: String): Int {

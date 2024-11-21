@@ -1,6 +1,6 @@
-package week1.step3.view
+package week1.racing.view
 
-import week1.step3.GameRound
+import week1.racing.GameRound
 
 class ResultView {
 

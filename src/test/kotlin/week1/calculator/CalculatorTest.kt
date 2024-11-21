@@ -1,4 +1,4 @@
-package week1.step2
+package week1.calculator
 
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Assertions

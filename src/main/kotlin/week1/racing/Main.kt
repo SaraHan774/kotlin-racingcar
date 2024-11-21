@@ -1,7 +1,7 @@
-package week1.step3
+package week1.racing
 
-import week1.step3.view.InputView
-import week1.step3.view.ResultView
+import week1.racing.view.InputView
+import week1.racing.view.ResultView
 
 fun main() {
     val inputView = InputView()

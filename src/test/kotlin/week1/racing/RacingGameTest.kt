@@ -1,4 +1,4 @@
-package week1.step3
+package week1.racing
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
