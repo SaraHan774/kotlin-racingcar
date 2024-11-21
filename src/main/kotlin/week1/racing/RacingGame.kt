@@ -9,7 +9,7 @@ class RacingGame(
     val gameRounds: List<GameRound> = _gameRounds
 
     fun start() {
-        for (round in 0 until numTries) {
+        repeat(numTries) { round ->
             val positions = mutableListOf<Int>()
             cars.forEach { car ->
                 car.moveForward()
