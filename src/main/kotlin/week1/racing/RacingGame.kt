@@ -3,16 +3,19 @@ package week1.racing
 class RacingGame(
     carNames: List<String>,
     private val numRounds: Int,
+    private val carMovementDecider: MovementDecider = CarMovementDecider()
 ) {
-    private val cars = carNames.map(::RacingCar)
+    private val cars = carNames.map { name -> RacingCar(name, carMovementDecider) }
     private val _gameRounds = mutableListOf<GameRound>()
     val gameRounds: List<GameRound> = _gameRounds
 
-    fun start() {
+    init {
         require(cars.isNotEmpty() && numRounds > 0) {
             "Game cannot be started! (cars.size = ${cars.size}, numRounds = $numRounds)"
         }
+    }
 
+    fun start() {
         repeat(numRounds) { round ->
             startRound(round)
         }
@@ -29,6 +32,7 @@ class RacingGame(
 }
 
 fun List<GameRound>.getWinnerNames(): List<String> {
+    check(this.isNotEmpty())
     val lastRecord = this.last().records
     val maxRecord = lastRecord.max()
     val winnerNames = lastRecord.filter { it.distance == maxRecord.distance }.map { it.name }
