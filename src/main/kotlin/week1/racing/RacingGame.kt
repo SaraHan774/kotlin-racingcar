@@ -14,17 +14,30 @@ class RacingGame(
         }
 
         repeat(numRounds) { round ->
-            val positions = mutableListOf<Int>()
-            cars.forEach { car ->
-                car.moveForward()
-                positions.add(car.currentPosition)
-            }
-            _gameRounds.add(GameRound(id = round + 1, records = positions))
+            startRound(round)
         }
+    }
+
+    private fun startRound(round: Int) {
+        val list = mutableListOf<Record>()
+        cars.forEach { car ->
+            car.moveForward()
+            list.add(Record(car.name, car.currentPosition))
+        }
+        _gameRounds.add(GameRound(id = round + 1, records = list))
     }
 }
 
 data class GameRound(
     val id: Int,
-    val records: List<Int>,
+    val records: List<Record>,
 )
+
+data class Record(
+    val name: String,
+    val distance: Int,
+) : Comparable<Record> {
+    override fun compareTo(other: Record): Int {
+        return this.distance.compareTo(other.distance)
+    }
+}
