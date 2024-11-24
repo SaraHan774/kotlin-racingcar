@@ -47,16 +47,16 @@ class RacingGameTest {
 
     // winner 선정 검증
     @Test
-    fun `{given} nonEmptyListOfCarNames & nonZeroNumberOfRounds & 항상 모든 차가 전진할 경우 {when} start() {then} getWinnerNames() == 모든 차 이름`() {
+    fun `{given} nonEmptyListOfCarNames & nonZeroNumberOfRounds & 항상 모든 차가 전진할 경우 {when} start() {then} getMaxDistanceRecords() 사이즈 == 총 차 대수`() {
         val racingGame =
             RacingGame(nonEmptyListOfCarNames, nonZeroNumberOfRounds, carMovementDecider = { true }) // 항상 모든 차가 움직인다
-        racingGame.start() // 게임 후에는 세 차가 모두 우승자로 뽑혀야 한다
-        assertEquals(racingGame.gameRounds.getWinnerNames(), nonEmptyListOfCarNames)
+        racingGame.start() // 게임 후에는 세 차가 모두 최장 길이 distance 레코드로 뽑혀야 한다
+        assertEquals(racingGame.gameRounds.getMaxDistanceRecords().size, nonEmptyListOfCarNames.size)
     }
 
     @Test
     fun `{given} empty game rounds {when} getWinnerNames() {then} throws IllegalStateException`() {
         val records = listOf<GameRound>()
-        assertThrows<IllegalStateException> { records.getWinnerNames() }
+        assertThrows<IllegalStateException> { records.getMaxDistanceRecords() }
     }
 }

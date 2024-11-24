@@ -31,12 +31,11 @@ class RacingGame(
     }
 }
 
-fun List<GameRound>.getWinnerNames(): List<String> {
+fun List<GameRound>.getMaxDistanceRecords(): List<Record> {
     check(this.isNotEmpty())
-    val lastRecord = this.last().records
-    val maxRecord = lastRecord.max()
-    val winnerNames = lastRecord.filter { it.distance == maxRecord.distance }.map { it.name }
-    return winnerNames
+    val finalRecords = this.last().records
+    val maxDistance = finalRecords.maxOf { it.distance }
+    return finalRecords.filter { it.distance  == maxDistance }
 }
 
 data class GameRound(
@@ -47,8 +46,4 @@ data class GameRound(
 data class Record(
     val name: String,
     val distance: Int,
-) : Comparable<Record> {
-    override fun compareTo(other: Record): Int {
-        return this.distance.compareTo(other.distance)
-    }
-}
+)
