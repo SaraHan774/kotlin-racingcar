@@ -1,14 +1,19 @@
 package week1.racing.view
 
 import week1.racing.GameRound
+import week1.racing.getWinnerNames
 
 class ResultView {
     fun printResult(rounds: List<GameRound>) {
-        println("실행 결과")
+        println("\n실행 결과\n")
+
         rounds.forEach { round ->
             buildMessageForEachRound(round)
             println()
         }
+
+        val winnerMessage = rounds.getWinnerNames().joinToString(separator = ", ")
+        println(winnerMessage + "가 최종 우승했습니다.")
     }
 
     private fun buildMessageForEachRound(round: GameRound) {

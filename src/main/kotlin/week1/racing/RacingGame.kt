@@ -28,6 +28,13 @@ class RacingGame(
     }
 }
 
+fun List<GameRound>.getWinnerNames(): List<String> {
+    val lastRecord = this.last().records
+    val maxRecord = lastRecord.max()
+    val winnerNames = lastRecord.filter { it.distance == maxRecord.distance }.map { it.name }
+    return winnerNames
+}
+
 data class GameRound(
     val id: Int,
     val records: List<Record>,
