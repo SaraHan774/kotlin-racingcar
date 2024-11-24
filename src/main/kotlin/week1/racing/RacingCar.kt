@@ -2,7 +2,7 @@ package week1.racing
 
 import kotlin.random.Random
 
-class RacingCar {
+class RacingCar(val name: String) {
     var currentPosition = 1
         private set
 
