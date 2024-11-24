@@ -29,14 +29,17 @@ class RacingGame(
         }
         _gameRounds.add(GameRound(id = round + 1, records = list))
     }
-}
 
-fun List<GameRound>.getWinnerNames(): List<String> {
-    check(this.isNotEmpty())
-    val lastRecord = this.last().records
-    val maxRecord = lastRecord.max()
-    val winnerNames = lastRecord.filter { it.distance == maxRecord.distance }.map { it.name }
-    return winnerNames
+    fun getFinalWinnerNames(): List<String> {
+        return getMaxDistanceRecords(gameRounds.last().records).map { it.name }
+    }
+
+    // 사실상 테스트를 위해서 노출되는 함수 같은데, 올바른 방향인지 확신이 서지 않는다.
+    fun getMaxDistanceRecords(records: List<Record>): List<Record> {
+        val maxDistance = records.maxOf { it.distance }
+        val winnerRecords = records.filter { it.distance == maxDistance }
+        return winnerRecords
+    }
 }
 
 data class GameRound(
@@ -47,8 +50,4 @@ data class GameRound(
 data class Record(
     val name: String,
     val distance: Int,
-) : Comparable<Record> {
-    override fun compareTo(other: Record): Int {
-        return this.distance.compareTo(other.distance)
-    }
-}
+)

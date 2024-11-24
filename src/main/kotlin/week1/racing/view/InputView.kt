@@ -1,9 +1,14 @@
 package week1.racing.view
 
 class InputView {
-    fun readStringsAndSplit(promptMessage: String, separator : String = ","): List<String> {
+    fun readCarNames(promptMessage: String): List<String> {
         if (promptMessage.isNotBlank()) println(promptMessage)
-        return readlnOrNull()?.split(separator) ?: emptyList()
+        val input = readlnOrNull()
+        return input?.let(::parseCarNames) ?: emptyList()
+    }
+
+    private fun parseCarNames(input: String): List<String> {
+        return input.split(",")
     }
 
     fun readIntSafelyOrZero(promptMessage: String): Int {
