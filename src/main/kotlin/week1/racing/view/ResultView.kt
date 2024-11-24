@@ -6,11 +6,21 @@ class ResultView {
     fun printResult(rounds: List<GameRound>) {
         println("실행 결과")
         rounds.forEach { round ->
-            round.records.forEach { positionCount ->
-                val path = PATH_DASH.repeat(positionCount)
-                println(path)
-            }
+            buildMessageForEachRound(round)
             println()
+        }
+    }
+
+    private fun buildMessageForEachRound(round: GameRound) {
+        fun buildMessage(carName: String, positionCount: Int) = buildString {
+            append(carName)
+            append(" : ")
+            append(PATH_DASH.repeat(positionCount))
+        }
+
+        round.records.forEach { (carName, positionCount) ->
+            val message = buildMessage(carName, positionCount)
+            println(message)
         }
     }
 
