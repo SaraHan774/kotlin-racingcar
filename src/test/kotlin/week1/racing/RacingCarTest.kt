@@ -2,6 +2,7 @@ package week1.racing
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class RacingCarTest {
     // 전진하는 경우
@@ -20,5 +21,12 @@ class RacingCarTest {
         assertThat(racingCar.currentPosition).isEqualTo(1)
         racingCar.moveForward(shouldMove = false)
         assertThat(racingCar.currentPosition).isEqualTo(1)
+    }
+
+    @Test
+    fun `{given} carName length longer than 5 {when} RacingCar constructor() {then} throws IllegalArgumentException`() {
+        assertThrows<IllegalArgumentException> {
+            RacingCar(name = "123456")
+        }
     }
 }
