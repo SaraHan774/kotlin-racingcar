@@ -3,7 +3,6 @@ package week1.racing.view
 import week1.racing.GameRound
 
 class ResultView {
-
     fun printResult(rounds: List<GameRound>) {
         println("실행 결과")
         rounds.forEach { round ->
