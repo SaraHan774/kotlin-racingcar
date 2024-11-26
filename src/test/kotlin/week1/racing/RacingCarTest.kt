@@ -3,6 +3,7 @@ package week1.racing
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import week1.racing.domain.RacingCar
 
 class RacingCarTest {
     // 전진하는 경우

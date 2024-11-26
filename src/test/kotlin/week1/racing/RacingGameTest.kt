@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import week1.racing.domain.MovementDecider
+import week1.racing.domain.RacingGame
+import week1.racing.domain.Record
 
 class RacingGameTest {
     private val nonEmptyListOfCarNames = listOf("A", "B", "C")
@@ -40,16 +43,6 @@ class RacingGameTest {
         val gameRound = racingGame.gameRounds.last()
         assertEquals(nonZeroNumberOfRounds, gameRound.id)
         assertEquals(nonEmptyListOfCarNames.size, gameRound.records.size)
-    }
-
-    // winner 선정 검증
-    @Test
-    fun `{given} 항상 모든 차가 전진할 경우 {when} start() {then} getFinalWinnerNames() == 모든 차 이름`() {
-        val racingGame = createRacingGame(carMovementDecider = { true }) // 항상 shouldMove 는 true 를 반환
-
-        racingGame.start() // 게임 후에는 세 차가 모두 우승자로 뽑혀야 한다
-
-        assertEquals(racingGame.getFinalWinnerNames(), nonEmptyListOfCarNames)
     }
 
     @Test

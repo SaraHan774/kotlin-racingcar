@@ -1,4 +1,4 @@
-package week1.racing
+package week1.racing.domain
 
 class RacingGame(
     carNames: List<String>,
@@ -30,11 +30,6 @@ class RacingGame(
         _gameRounds.add(GameRound(id = round + 1, records = list))
     }
 
-    fun getFinalWinnerNames(): List<String> {
-        return getMaxDistanceRecords(gameRounds.last().records).map { it.name }
-    }
-
-    // 사실상 테스트를 위해서 노출되는 함수 같은데, 올바른 방향인지 확신이 서지 않는다.
     fun getMaxDistanceRecords(records: List<Record>): List<Record> {
         val maxDistance = records.maxOf { it.distance }
         val winnerRecords = records.filter { it.distance == maxDistance }
