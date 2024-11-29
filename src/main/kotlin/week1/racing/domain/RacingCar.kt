@@ -2,7 +2,7 @@ package week1.racing.domain
 
 class RacingCar(
     val name: String,
-    private val carMovementDecider: MovementDecider
+    private val carMovementDecider: MovementDecider,
 ) {
     init {
         require(name.length <= MAX_CAR_NAME_LENGTH) {
