@@ -3,7 +3,7 @@ package week1.racing.domain
 class RacingGame(
     carNames: List<String>,
     private val numRounds: Int,
-    private val carMovementDecider: MovementDecider = CarMovementDecider()
+    private val carMovementDecider: MovementDecider = CarMovementDecider(),
 ) {
     private val cars = carNames.map { name -> RacingCar(name, carMovementDecider) }
     private val _gameRounds = mutableListOf<GameRound>()
@@ -16,33 +16,26 @@ class RacingGame(
     }
 
     fun start() {
-        repeat(numRounds) { round ->
-            startRound(round)
+        repeat(numRounds) {
+            startRound()
         }
     }
 
-    private fun startRound(round: Int) {
-        val list = mutableListOf<Record>()
+    private fun startRound() {
+        val list = mutableListOf<GameRoundRecord>()
         cars.forEach { car ->
             car.moveForward()
-            list.add(Record(car.name, car.currentPosition))
+            list.add(GameRoundRecord(car.name, car.currentPosition))
         }
-        _gameRounds.add(GameRound(id = round + 1, records = list))
-    }
-
-    fun getMaxDistanceRecords(records: List<Record>): List<Record> {
-        val maxDistance = records.maxOf { it.distance }
-        val winnerRecords = records.filter { it.distance == maxDistance }
-        return winnerRecords
+        _gameRounds.add(GameRound(records = list))
     }
 }
 
 data class GameRound(
-    val id: Int,
-    val records: List<Record>,
+    val records: List<GameRoundRecord>,
 )
 
-data class Record(
+data class GameRoundRecord(
     val name: String,
     val distance: Int,
 )
