@@ -1,7 +1,6 @@
 package week1.racing.controller
 
 import week1.racing.domain.RacingGame
-import week1.racing.domain.RacingGameWinner
 import week1.racing.view.InputView
 import week1.racing.view.ResultView
 
@@ -17,7 +16,7 @@ class RacingGameController {
         game.start()
         resultView.printRounds(game.gameRounds)
 
-        val finalWinner = RacingGameWinner().getWinners(game.gameRounds.last().records)
+        val finalWinner = game.getWinner()
         resultView.printWinners(finalWinner)
     }
 }

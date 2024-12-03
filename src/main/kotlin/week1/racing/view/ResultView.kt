@@ -1,7 +1,7 @@
 package week1.racing.view
 
 import week1.racing.domain.GameRound
-import week1.racing.domain.GameRoundRecord
+import week1.racing.domain.RacingCar
 
 class ResultView {
     fun printRounds(gameRounds: List<GameRound>) {
@@ -12,7 +12,7 @@ class ResultView {
         }
     }
 
-    fun printWinners(winners: List<GameRoundRecord>) {
+    fun printWinners(winners: List<RacingCar>) {
         val winnerMessage = winners.joinToString { ", " }
         println("$winnerMessage 가 최종 우승 했습니다.")
     }

@@ -5,6 +5,7 @@ class RacingGame(
     private val numRounds: Int,
     private val carMovementDecider: MovementDecider = CarMovementDecider(),
 ) {
+    private val winner = RacingGameWinner()
     private val cars = carNames.map { name -> RacingCar(name, carMovementDecider) }
     private val _gameRounds = mutableListOf<GameRound>()
     val gameRounds: List<GameRound> = _gameRounds
@@ -19,6 +20,10 @@ class RacingGame(
         repeat(numRounds) {
             startRound()
         }
+    }
+
+    fun getWinner(): List<RacingCar> {
+        return winner.getWinners(cars)
     }
 
     private fun startRound() {
