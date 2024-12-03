@@ -7,16 +7,17 @@ import week1.racing.view.ResultView
 class RacingGameController {
     fun play() {
         val inputView = InputView()
-        val resultView = ResultView()
-
         val carNames = inputView.readCarNames(InputView.ENTER_CAR_NAMES_MESSAGE)
         val numRounds = inputView.readIntSafelyOrZero(InputView.HOW_MANY_ROUNDS_MESSAGE)
         val game = RacingGame(carNames = carNames, numRounds = numRounds)
-
         game.start()
-        resultView.printRounds(game.gameRounds)
+        printResults(game)
+    }
 
+    private fun printResults(game: RacingGame) {
+        val resultView = ResultView()
         val finalWinner = game.getWinner()
+        resultView.printRounds(game.gameRounds)
         resultView.printWinners(finalWinner)
     }
 }
